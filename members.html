@@ -1,3 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orodha ya Wanachama</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Dashbodi ya Wanachama</h1>
+  <button id="logoutBtn" style="float:right; margin:10px; padding:8px 16px; background:red; color:white; border:none; border-radius:5px; cursor:pointer;">
+    Toka (Logout)
+  </button>
+</header>
+
+<section>
+  <!-- Jumla ya Wanachama -->
+  <div style="margin:20px 0; padding:10px; background:#f5f5f5; border-radius:8px;">
+    <h2>Jumla ya Wanachama: <span id="totalMembers">0</span></h2>
+  </div>
+
+  <div style="margin:20px 0; padding:10px; background:#f5f5f5; border-radius:8px;">
+    <h2>Jumla ya Wanachama: <span id="totalMembers">0</span></h2>
+    <button id="exportBtn" style="margin-top:10px; padding:8px 16px; background:green; color:white; border:none; border-radius:5px; cursor:pointer;">
+      Pakua CSV
+    </button>
+  </div>
+  
+
+  <!-- Orodha ya Wanachama -->
+  <h2>Orodha ya Wanachama</h2>
+  <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; text-align:left;">
+    <thead style="background:#ddd;">
+      <tr>
+        <th>Jina Kamili</th>
+        <th>Namba ya Simu</th>
+        <th>Barua Pepe</th>
+      </tr>
+    </thead>
+    <tbody id="membersTable"></tbody>
+  </table>
+</section>
+
+<footer>
+  <p>&copy; 2025 Kikundi chetu cha Kiislamu</p>
+</footer>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+  // Badilisha na config yako
+  const firebaseConfig = {
+    apiKey: "AIzaSyAKjy-yZvhP1QhfMyaHsC_4GWwGs2LbcCA",
+  authDomain: "jamaat-al-islamiyyah.firebaseapp.com",
+  databaseURL: "https://jamaat-al-islamiyyah-default-rtdb.firebaseio.com",
+  projectId: "jamaat-al-islamiyyah",
+  storageBucket: "jamaat-al-islamiyyah.firebasestorage.app",
+  messagingSenderId: "33263068883",
+  appId: "1:33263068883:web:22bfd018f135c403651626",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+  const database = firebase.database();
+
+  // Hakikisha admin ame-login
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = "login.html";
+    }
+  });
+
+  // 🚀 Toa data ya wanachama kutoka Firebase
+  const membersRef = database.ref("members");
+  const membersTable = document.getElementById("membersTable");
+  const totalMembers = document.getElementById("totalMembers");
+
+  membersRef.on("value", (snapshot) => {
+    const data = snapshot.val();
+    membersTable.innerHTML = ""; // safisha kwanza
+    let count = 0;
+
+    for (let id in data) {
+      count++;
+      let row = `
+        <tr>
+          <td>${data[id].fullname || ""}</td>
+          <td>${data[id].phone || ""}</td>
+          <td>${data[id].email || ""}</td>
+        </tr>
+      `;
+      membersTable.innerHTML += row;
+    }
+
+    totalMembers.textContent = count;
+  });
+
+  // 🚪 Logout
+  const logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn.addEventListener("click", () => {
+    auth.signOut().then(() => {
+      alert("Umetoka salama, Mjema!");
+      window.location.href = "index.html";
+    });
+  });
+
+  // 📥 Export wanachama kama CSV
+function downloadCSV(members) {
+  let csv = "Jina Kamili,Namba ya Simu,Barua Pepe\n";
+
+  members.forEach(member => {
+    csv += `${member.fullname || ""},${member.phone || ""},${member.email || ""}\n`;
+  });
+
+  // Unda faili la CSV
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.setAttribute("hidden", "");
+  a.setAttribute("href", url);
+  a.setAttribute("download", "wanachama.csv");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+const exportBtn = document.getElementById("exportBtn");
+
+exportBtn.addEventListener("click", () => {
+  membersRef.once("value", (snapshot) => {
+    const data = snapshot.val();
+    let membersList = [];
+
+    for (let id in data) {
+      membersList.push({
+        fullname: data[id].fullname,
+        phone: data[id].phone,
+        email: data[id].email
+      });
+    }
+
+    downloadCSV(membersList);
+  });
+});
+
+</script>
+
+</body>
+</html>
+=======
 <!DOCTYPE html>
 <html lang="sw">
 <head>
