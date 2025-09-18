@@ -1,0 +1,270 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  
+  header {
+    background: #00796b;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  nav {
+    background: #004d40;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .hero {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+  }
+  
+  section {
+    padding: 2rem;
+  }
+  
+  form {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  form input, form button {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  form button {
+    background: #00796b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  form button:hover {
+    background: #004d40;
+  }
+  
+  footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background: #00796b;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background: #f2f2f2;
+  }
+  
+  /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Mwili wa website */
+  body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  header {
+    background-color: #00796b; /* kijani kirefu */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Header h1 */
+  header h1 {
+    margin-bottom: 10px;
+  }
+  
+  /* Buttons ndani ya header */
+  header button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #c62828; /* nyekundu ya logout */
+    color: white;
+  }
+  
+  /* Navigation links (ikiwa unayo nav) */
+  nav {
+    background: #004d40;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Section ya dashboard */
+  section {
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  /* Jumla ya wanachama */
+  section div {
+    background-color: #e0f2f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Button ya pakua CSV */
+  #exportBtn {
+    background-color: #2e7d32; /* kijani kibichi */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #exportBtn:hover {
+    background-color: #1b5e20;
+  }
+  
+  /* Table ya wanachama */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #00796b;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  /* For tablets (width ≤ 768px) */
+@media screen and (max-width: 768px) {
+    header, footer, section {
+      padding: 15px;
+    }
+  
+    table, th, td {
+      font-size: 14px;
+    }
+  
+    header button, #exportBtn {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+  }
+  
+  /* For mobile phones (width ≤ 480px) */
+  @media screen and (max-width: 480px) {
+    header, footer, section {
+      padding: 10px;
+    }
+  
+    table, th, td {
+      font-size: 12px;
+    }
+  
+    header h1 {
+      font-size: 18px;
+    }
+  
+    header button, #exportBtn {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  

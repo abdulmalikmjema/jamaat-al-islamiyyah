@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usajili wa Ushirika</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header style="background-color:#00796b; color:white; text-align:center; padding:40px 20px; border-bottom-left-radius:8px; border-bottom-right-radius:8px;">
+  <h1>Usajili wa Ushirika</h1>
+  <p style="margin-top:10px; font-size:16px;">Jisajili ili kushiriki kikamilifu katika shughuli za kikundi chetu cha dini.</p>
+</header>
+
+<section style="padding:20px; max-width:600px; margin:auto;">
+
+  <form id="registrationForm" style="background:#e0f2f1; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+    <h2 style="margin-bottom:15px; color:#00796b;">Sehemu A: Taarifa Binafsi</h2>
+
+    <label>Jina Kamili:</label>
+    <input type="text" id="fullname" placeholder="Jina lako kamili" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+
+    <label>Jinsia:</label>
+    <select id="gender" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+      <option value="">Chagua...</option>
+      <option value="Mwanaume">Mwanaume</option>
+      <option value="Mwanamke">Mwanamke</option>
+    </select>
+
+    <label>Tarehe ya Kuzaliwa:</label>
+    <input type="date" id="dob" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+
+    <label>Namba ya Kitambulisho (NIDA / Leseni / Pasipoti):</label>
+    <input type="text" id="idNumber" placeholder="Namba ya kitambulisho" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+
+    <label>Anuani ya Makazi:</label>
+    <input type="text" id="address" placeholder="Anuani kamili" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+
+    <label>Namba ya Simu:</label>
+    <input type="tel" id="phone" placeholder="Namba ya simu" required style="width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:1px solid #ccc;">
+
+    <label>Barua Pepe:</label>
+    <input type="email" id="email" placeholder="Barua pepe" required style="width:100%; padding:8px; margin-bottom:20px; border-radius:5px; border:1px solid #ccc;">
+
+    <button type="submit" style="background-color:#2e7d32; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;">Sajili</button>
+
+  </form>
+
+</section>
+
+<footer style="background-color:#004d40; color:white; text-align:center; padding:20px; margin-top:30px;">
+  <p>&copy; 2025 Kikundi chetu cha Kiislamu. Haki zote zimehifadhiwa.</p>
+</footer>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  // 🔑 Badilisha config hii na yako kutoka Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAKjy-yZvhP1QhfMyaHsC_4GWwGs2LbcCA",
+  authDomain: "jamaat-al-islamiyyah.firebaseapp.com",
+  databaseURL: "https://jamaat-al-islamiyyah-default-rtdb.firebaseio.com",
+  projectId: "jamaat-al-islamiyyah",
+  storageBucket: "jamaat-al-islamiyyah.firebasestorage.app",
+  messagingSenderId: "33263068883",
+  appId: "1:33263068883:web:22bfd018f135c403651626",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  const form = document.getElementById("registrationForm");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const memberData = {
+      fullname: document.getElementById("fullname").value,
+      gender: document.getElementById("gender").value,
+      dob: document.getElementById("dob").value,
+      idNumber: document.getElementById("idNumber").value,
+      address: document.getElementById("address").value,
+      phone: document.getElementById("phone").value,
+      email: document.getElementById("email").value
+    };
+
+    // Hifadhi data kwenye Firebase
+    database.ref("members").push(memberData, (error) => {
+      if (error) {
+        alert("Tatizo limejitokeza, jaribu tena.");
+      } else {
+        alert("Usajili umefanikiwa, Mjema!");
+        form.reset();
+        window.location.href = "index.html";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
